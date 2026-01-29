@@ -11,13 +11,13 @@ from dataclasses import dataclass
 import numpy as np
 from PIL import Image
 
-from memory_manager import MemoryManager, MemoryOptimizer
-from model_loader import DiffusionModelLoader, ModelConfig
-from execution_state_machine import (
+from .memory_manager import MemoryManager, MemoryOptimizer
+from .model_loader import DiffusionModelLoader, ModelConfig
+from .execution_state_machine import (
     ExecutionStateMachine, ExecutionContext, ExecutionState,
     ExecutionMonitor, ErrorType
 )
-from job_queue_manager import JobRequest, JobResult, JobStatus, JobManager
+from .job_queue_manager import JobRequest, JobResult, JobStatus, JobManager
 
 logger = logging.getLogger(__name__)
 
