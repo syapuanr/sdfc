@@ -13,7 +13,7 @@ from enum import Enum
 from datetime import datetime
 import uuid
 
-from execution_state_machine import ExecutionContext, ExecutionConfig
+from .execution_state_machine import ExecutionContext, ExecutionConfig
 
 logger = logging.getLogger(__name__)
 
