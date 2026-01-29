@@ -1,41 +1,63 @@
-# Diffusion Runtime
+# SDFC (Stable Diffusion For Colab)
 
-> **Fault-Tolerant Diffusion Inference System** untuk lingkungan dengan memori GPU terbatas
+> **Fault-Tolerant Diffusion Inference System** optimized for limited VRAM environments.
 
 ## 🎯 Overview
 
-Diffusion Runtime adalah sistem inferensi difusi yang production-ready, dioptimalkan untuk lingkungan dengan VRAM terbatas seperti Google Colab.
+**SDFC** (Stable Diffusion For Colab) adalah sistem inferensi difusi yang *production-ready*, dioptimalkan khusus untuk lingkungan dengan VRAM terbatas seperti Google Colab, Kaggle, atau Local GPU (4GB-8GB VRAM).
 
-### Key Features
+### ✨ Key Features
 
-✅ Phase-Based Model Loading  
-✅ Automatic OOM Recovery  
-✅ Job Queue System  
-✅ Real-time Monitoring  
-✅ Production Ready  
-
+✅ **Phase-Based Model Loading** (CPU Offload otomatis saat idle)  
+✅ **Automatic OOM Recovery** (Sistem anti-crash yang pintar)  
+✅ **Job Queue System** (Manajemen antrean prioritas)  
+✅ **Real-time Monitoring** (Pemantauan penggunaan VRAM live)  
+✅ **Production Ready** (Arsitektur modular dan mudah dikembangkan)
 ## 🚀 Quick Start
 
-```bash
-pip install -e .
-```
+### 1. Installation
 
-```python
-from diffusion_runtime import DiffusionRuntime
+```bash
+# Clone repository
+git clone [https://github.com/syapuanr/sdfc.git](https://github.com/syapuanr/sdfc.git)
+cd sdfc
+
+# Install dependencies
+pip install -e .
+from diffusion_runtime.src.core.diffusion_engine import DiffusionInferenceEngine
 from diffusers import StableDiffusionPipeline
 
-runtime = DiffusionRuntime("runwayml/stable-diffusion-v1-5")
-runtime.start(StableDiffusionPipeline)
+# Inisialisasi Engine (Mode Hemat VRAM aktif)
+engine = DiffusionInferenceEngine(
+    model_id="runwayml/stable-diffusion-v1-5",
+    enable_cpu_offload=True
+)
 
-result = runtime.generate_sync(prompt="A beautiful sunset")
-result.result.images[0].save("output.png")
+# Load Pipeline
+print("⏳ Loading model...")
+engine.initialize(StableDiffusionPipeline)
 
-runtime.stop()
-```
+# Generate Image
+print("🎨 Generating image...")
+result = engine.generate(
+    prompt="A futuristic city with neon lights, cyberpunk style, 8k resolution",
+    num_inference_steps=30,
+    guidance_scale=7.5
+)
 
+# Save Output
+if result.images:
+    output_path = "output_sdfc.png"
+    result.images[0].save(output_path)
+    print(f"✅ Gambar berhasil disimpan di: {output_path}")
+---
+
+### ✂️ BAGIAN 3: Footer & Struktur (Paste paling bawah)
+
+```markdown
 ## 🔗 Repository
 
-**GitHub:** [github.com/syapuanr/diffusion-runtime](https://github.com/syapuanr/diffusion-runtime)
+**GitHub:** [github.com/syapuanr/sdfc](https://github.com/syapuanr/sdfc)
 
 ## 📖 Documentation
 
@@ -43,19 +65,16 @@ runtime.stop()
 - [Quick Start Guide](docs/QUICKSTART.md)  
 - [System Summary](docs/SYSTEM_SUMMARY.md)
 
-## 📁 Structure
-
-```
-diffusion_runtime/
-├── src/core/          # Core modules
-├── src/config/        # Configuration
-├── src/utils/         # Utilities
-├── examples/          # Examples
-├── tests/             # Tests
-└── docs/              # Documentation
-```
-
-See [docs/SYSTEM_SUMMARY.md](docs/SYSTEM_SUMMARY.md) for details.
+## 📁 Project Structure
+sdfc/
+├── src/
+│   ├── core/          # Core Engine
+│   ├── config/        # Configuration
+│   └── utils/         # Monitoring
+├── examples/          # Contoh script
+├── docs/              # Dokumentasi
+└── outputs/           # Hasil gambar
+Lihat [docs/SYSTEM_SUMMARY.md](docs/SYSTEM_SUMMARY.md) untuk detail arsitektur.
 
 ## 📄 License
 
