@@ -1,0 +1,25 @@
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Diffusion models
+diffusers>=0.21.0
+transformers>=4.30.0
+accelerate>=0.20.0
+
+# Image processing
+Pillow>=9.5.0
+numpy>=1.24.0
+
+# Optional: Memory efficient attention
+xformers>=0.0.20  # Recommended for memory optimization
+
+# Optional: Model formats
+safetensors>=0.3.0
+
+# Optional: Better performance
+scipy>=1.10.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+black>=23.0.0
