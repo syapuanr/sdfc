@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 
-from memory_manager import MemoryManager, MemoryLocation, MemoryOptimizer
+from .memory_manager import MemoryManager, MemoryLocation, MemoryOptimizer
 
 logger = logging.getLogger(__name__)
 

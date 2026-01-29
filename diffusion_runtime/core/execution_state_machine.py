@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import traceback
 
-from memory_manager import MemoryManager
+from .memory_manager import MemoryManager
 
 logger = logging.getLogger(__name__)
 
